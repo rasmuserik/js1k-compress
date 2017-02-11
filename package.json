@@ -1,0 +1,30 @@
+{
+  "name": "js1k-compress",
+  "version": "0.0.1",
+  "main": "entry-lz-lz.js",
+  "description": "1K LZ77 source compression npm module",
+  "scripts": {
+    "test": "true"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/solsort/js1k-compress"
+  },
+  "keywords": [
+    "js1k",
+    "minify",
+    "compress",
+    "lz77"
+  ],
+  "author": "RasmusErik / solsort.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/solsort/js1k-compress/issues"
+  },
+  "homepage": "http://js1k-compress.solsort.com",
+  "devDependencies": {
+    "live-server": "^1.2.0",
+    "btoa": "^1.1.2",
+    "utf8": "^2.1.2"
+  }
+}
