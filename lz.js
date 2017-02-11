@@ -4,7 +4,7 @@
  *              1K LZ77 source compression npm module               *
  *                                                                  *
  *                                                                  *
- *      See http://js1k-compress.solsort.com for description        *
+ *        See http://js1k-compress.solsort.com for details          *
  *                                                                  *
  *                                                                  *
  *                                                                  *
@@ -47,15 +47,14 @@ var compress = input => {
       .replace(/[$]/g, '\\$')
       .replace(/`/g, '\\`')
 
-    return '(f=(i,o,p,c)=>(c=i.charCodeAt(p),c?f(i,o+(c<256?i[p]:o.slice(c&2047,(c&2047)+(c>>11))),++p):o))(`' + output
+    return '(f=(i,o,p,c)=>(c=i.charCodeAt(p))?f(i,o+(c<256?i[p]:o.slice(c&2047,(c&2047)+(c>>11))),++p):o)(`' + output
         + '`,``,0)'
 }
 
 if(typeof module === 'object') {
     module.exports = compress
 } else {
-  document.write('<pre>' + `
-
+    document.write('<pre>' + `
 > source.length
 
 ${s.length}
@@ -71,6 +70,5 @@ ${compress(s)}
 > eval(compress(source))
 
 ${eval(compress(s))}
-
-  `.replace(/</g, '&lt;'))
+    `.replace(/</g, '&lt;'))
 }
