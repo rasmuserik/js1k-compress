@@ -1,19 +1,18 @@
-compress = (str) => {
+compress = s => {
 
   dict = ['\0.']
 
-  str.replace(/[\0-\x20]/g, function(c) {
-    dict[c.charCodeAt(0)] = '\0.'
-  })
+  s.replace(/[\0-\x20]/g, 
+      s => dict[s.charCodeAt(0)] = '\0.')
 
   for(i = 0; i < 32; ++i) {
     if(!dict[i]) {
       pair = '  '
-      if(str.length > 1) {
+      if(s.length > 1) {
         freq = {}
 
-        for(j = 0; j < str.length - 1; ++j) {
-          pair = str[j] + str[j + 1]
+        for(j = 0; j < s.length - 1; ++j) {
+          pair = s[j] + s[j + 1]
           freq[pair] = (freq[pair] || 1e8) -1
         }
 
@@ -24,7 +23,7 @@ compress = (str) => {
         hist = hist.sort()
 
         pair = hist[0].slice(8)
-        str = str.split(pair).join(String.fromCharCode(i))
+        s = s.split(pair).join(String.fromCharCode(i))
       } else {
         pair = '  '
       }
@@ -32,22 +31,20 @@ compress = (str) => {
     }
   }
 
-  dict = dict.join('')
-  dict = strEscape(dict)
-  str = strEscape(str)
-
-  return '`' + str + '`.replace(/[\\s\\S]/mg,f=(s,c)=>(d=`' +
-    dict + '`,c=s.charCodeAt(0),g=p=>f(d[p]),c>31||"\0"===d[c*2]?s:g(c*2)+g(c*2+1)))'
-}
-
-strEscape = (str) => {
-  return str
+  esc = s => s
     .replace(/\\/g, '\\\\')
     .replace(/\n/g, '\\n')
     .replace(/\r/g, '\\r')
     .replace(/\0/g, '\\0')
     .replace(/[$]/g, '\\$')
     .replace(/`/g, '\\`')
+
+  dict = dict.join('')
+  dict = esc(dict)
+  s = esc(s)
+
+  return '`' + s + '`.replace(/[\\s\\S]/mg,f=(s,c)=>(d=`' +
+    dict + '`,c=s.charCodeAt(0),g=p=>f(d[p]),c>31||"\0"===d[c*2]?s:g(c*2)+g(c*2+1)))'
 }
 
 (typeof module === 'undefined')
