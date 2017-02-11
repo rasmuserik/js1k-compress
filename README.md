@@ -7,7 +7,7 @@
 
 # 1K source compression npm module
 
-Two source code compressors, for [JS1K](http://js1k.com). Makes self-extracting JavaScript. Both are less the 1KB.
+Two source code compressors, for [JS1K](http://js1k.com). Makes self-extracting JavaScript. Both are less than 1KB.
 
 **Full of bugs, may or may not work :)**
 
