@@ -1,13 +1,20 @@
-var compress = require('./compress.js');
-var fs = require('fs');
-var source= fs.readFileSync('compress.js', 'utf-8');
-string = compress(source);
-var code = 'eval(s=' + string + ')';
+function write(file, alg, b64) {
+  var compress = require('./' + alg + '.js');
+  var fs = require('fs');
+  var source= fs.readFileSync(file + '.js', 'utf-8');
+  string = compress(source);
+  var code = 'eval(s=' + string + ')';
 
-s = fs.writeFileSync('entry.js', code);
-s = fs.writeFileSync('entry.js.b64', require('btoa')(require('utf8').encode(code)));
+  fs.writeFileSync(`entry-${file}-${alg}.js`, code);
+  if(b64) {
+    fs.writeFileSync(`entry-${file}-${alg}.js.b64`, require('btoa')(require('utf8').encode(code)));
+  }
 
-console.log(string.length, eval(string).length);
-console.log(eval(string)===source);
-console.log();
-console.log(eval(string));
+  console.log(file, alg, eval(string) === source);
+}
+
+      write('grammar', 'lz');
+      write('grammar', 'grammar');
+      write('lz', 'lz', true);
+      write('lz', 'grammar');
+      write('lz', 'entry-lz-lz');
