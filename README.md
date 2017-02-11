@@ -11,7 +11,7 @@ Two source code compressors, for [JS1K](http://js1k.com). Makes self-extracting 
 
 **Full of bugs, may or may not work :)**
 
-- Version 1 is [grammar based compression](https://en.wikipedia.org/wiki/Grammar-based_code), (awesome theory), with a greedy binary grammar. The compression is quite bad, as I originally designed for byte, and not utf-8 encoding. Redesigning for utf-8 encoding thus made the grammar very small. It compresses itself from 1226 bytes to 968 bytes.
+- Version 1 is [grammar based compression](https://en.wikipedia.org/wiki/Grammar-based_code), (awesome theory), with a greedy binary grammar. The compression is quite bad, as I originally designed it for byte encoding, and not utf-8 encoding. Redesigning for utf-8 encoding thus made the grammar very small. It compresses itself from 1226 bytes to 968 bytes.
 - Version 2 is semi-[lz77](https://en.wikipedia.org/wiki/LZ77_and_LZ78). This is more suitable for self-extracting utf-8 encoded JavaScript. It only works for small programs up to ~2K, without unicode characters, and has other bugs. It compresses itself from 2040 bytes to 678 characters = 986 bytes.
 
 Usage example:
