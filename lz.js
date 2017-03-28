@@ -47,7 +47,7 @@ var compress = input => {
       .replace(/[$]/g, '\\$')
       .replace(/`/g, '\\`')
 
-    return '(f=(i,o,p,c)=>(c=i.charCodeAt(p))?f(i,o+(c<256?i[p]:o.slice(c&2047,(c&2047)+(c>>11))),++p):o)(`' + output
+    return '(f=(i,o,p,c)=>(c=i.charCodeAt(p))?f(i,o+(c<256?i[p]:o.slice(c&2047,(c>>11)+c&2047)),++p):o)(`' + output
         + '`,``,0)'
 }
 
